@@ -31,6 +31,8 @@ public class User implements UserDetails
 
 	private String password;
 
+	private String name;
+
 	@OneToMany(mappedBy = "user")
 	private List<Assignment> assignments = new ArrayList<>();
 

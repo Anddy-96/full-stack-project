@@ -39,14 +39,17 @@ public class JwtFilter extends OncePerRequestFilter
 	{
 
 		// Get Autorize author and validate
+
 		final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-		if(StringUtils.hasText(header) && !header.startsWith("Bearer "))
+		System.out.println(header);
+		if( !StringUtils.hasText(header) || (StringUtils.hasText(header) && !header.startsWith("Bearer ")))
 		{
 			chain.doFilter(request, response);
 			return;
 		}
 
 		final String token = header.split(" ")[1].trim();
+		System.out.println(token);
 		//Get user from token
 		UserDetails userDetails = userRepository.findByUsername(jwtUtil.getUsernameFromToken(token)).orElse(null);
 
